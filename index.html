@@ -145,10 +145,9 @@ section{padding:108px 56px}
 .bcard::before{content:'';position:absolute;inset:0;background:linear-gradient(145deg,var(--gu),transparent);opacity:0;transition:opacity .3s}
 .bcard:hover{transform:translateY(-6px);box-shadow:var(--sh);border-color:var(--gl)}
 .bcard:hover::before{opacity:1}
-.blogo{width:80px;height:48px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
-.blogo img{max-width:80px;max-height:44px;object-fit:contain;filter:grayscale(20%);transition:filter .3s}
-.bcard:hover .blogo img{filter:grayscale(0%)}
-.blogo-fb{font-family:var(--fp);font-size:16px;font-weight:500;color:var(--gd);letter-spacing:.5px}
+.blogo{width:100%;height:56px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;padding:0 8px}
+.blogo img{max-width:100%;max-height:52px;object-fit:contain;transition:opacity .3s}
+.bcard:hover .blogo img{opacity:.85}
 .bnm{font-size:14px;font-weight:600;color:var(--dk);position:relative;z-index:1}
 .bct{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--g);position:relative;z-index:1;font-weight:500}
 
@@ -670,37 +669,82 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
 
 <script>
 /* ── BRANDS DATA with logo URLs ── */
+/* ── BRAND LOGOS: confirmed Wikimedia URLs ── */
+const LOGOS = {
+  'Bioderma':       'https://upload.wikimedia.org/wikipedia/commons/7/7b/Bioderma_logo.svg',
+  'CeraVe':         'https://upload.wikimedia.org/wikipedia/commons/4/42/CeraVe_logo.png',
+  'Vichy':          'https://upload.wikimedia.org/wikipedia/commons/9/9b/Vichy_Laboratoires_%28logo%29.jpg',
+  'La Roche-Posay': 'https://upload.wikimedia.org/wikipedia/commons/4/47/La_Roche-Posay_%28brand%29.svg',
+  'Avène':          'https://upload.wikimedia.org/wikipedia/commons/9/97/Av_new-logo-2022_eau-thermale-avene.png',
+  'Biotherm':       'https://upload.wikimedia.org/wikipedia/commons/d/d2/Biotherm_logo.png',
+  "L'Oréal":        'https://upload.wikimedia.org/wikipedia/commons/9/9d/L%27Or%C3%A9al_logo.svg',
+  'Gillette':       'https://upload.wikimedia.org/wikipedia/commons/7/7e/Gillette_logo.svg',
+  'Evian':          'https://upload.wikimedia.org/wikipedia/commons/1/18/Evian_logo.svg',
+  'Braun':          'https://upload.wikimedia.org/wikipedia/commons/1/16/Braun_Logo.svg',
+  'Oral-B':         'https://upload.wikimedia.org/wikipedia/commons/8/84/Oral-B_logo.svg',
+  'Philips':        'https://upload.wikimedia.org/wikipedia/commons/5/52/Philips_logo_new.svg',
+  'Finish':         'https://upload.wikimedia.org/wikipedia/commons/2/23/Finish_logo.jpg',
+  'Fairy':          'https://upload.wikimedia.org/wikipedia/en/5/59/Fairy_logo.png',
+  'Ariel':          'https://upload.wikimedia.org/wikipedia/en/3/37/Ariel_Logo.png',
+  'Tommee Tippee':  'https://upload.wikimedia.org/wikipedia/en/1/12/Tommee_Tippee_logo.png',
+  'Neutrogena':     'https://upload.wikimedia.org/wikipedia/commons/3/30/Neutrogena_logo.svg',
+  'Eucerin':        'https://upload.wikimedia.org/wikipedia/commons/b/bd/Eucerin_logo.svg',
+  'Nivea':          'https://upload.wikimedia.org/wikipedia/commons/b/bd/Nivea_logo.svg',
+  'Clinique':       'https://upload.wikimedia.org/wikipedia/commons/4/45/Clinique_logo.svg',
+  'Nuxe':           'https://upload.wikimedia.org/wikipedia/commons/0/02/NUXE-LOGO-EQ3308C.png',
+};
+
+/* Accurate text fallbacks for brands without public logos */
+const FALLBACK_SVG = {
+  'SVR':           {text:'SVR', color:'#1a1a1a', size:48, weight:900, font:'Arial,sans-serif'},
+  'Uriage':        {text:'URIAGE', color:'#1a3a6e', size:26, weight:700, font:'Arial,sans-serif'},
+  'Byphasse':      {text:'byphasse', color:'#222', size:24, weight:300, font:'Georgia,serif'},
+  'Marvis':        {text:'MARVIS', color:'#6b0000', size:28, weight:400, font:'Georgia,serif'},
+  'MAM':           {text:'MAM', color:'#c41e7e', size:42, weight:900, font:'Arial,sans-serif'},
+  'Olaplex':       {text:'OLAPLEX', color:'#111', size:22, weight:600, font:'Arial,sans-serif'},
+  'Lactacyd':      {text:'Lactacyd', color:'#005baa', size:24, weight:700, font:'Arial,sans-serif'},
+  'Scholl':        {text:'Scholl', color:'#d10031', size:30, weight:900, font:'Arial,sans-serif'},
+  'Solgar':        {text:'SOLGAR', color:'#1a5c2a', size:26, weight:700, font:'Georgia,serif'},
+};
+
+function makeFallback(brand) {
+  const f = FALLBACK_SVG[brand] || {text: brand, color:'#3D6B41', size:24, weight:600, font:'Arial'};
+  const vw = Math.max(120, f.text.length * f.size * 0.62);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${vw} 60"><text y="42" font-family="${f.font},sans-serif" font-size="${f.size}" font-weight="${f.weight}" fill="${f.color}">${f.text}</text></svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
 const brands=[
-  {n:'Bioderma',c:'dermo',pl:'Dermokosmetyki',en:'Dermo',logo:'https://images.seeklogo.com/logo-png/1/2/bioderma-logo-png_seeklogo-19622.png'},
-  {n:'CeraVe',c:'dermo',pl:'Dermokosmetyki',en:'Dermo',logo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrZvBXQgYrb8MffNLp3d8WiwiIw9HzEOzz4Q&s'},
-  {n:'Vichy',c:'dermo',pl:'Dermokosmetyki',en:'Dermo',logo:'https://logoeps.com/wp-content/uploads/2012/11/vichy-vector-logo.png'},
-  {n:'La Roche-Posay',c:'dermo',pl:'Dermokosmetyki',en:'Dermo',logo:'https://images.seeklogo.com/logo-png/62/2/la-roche-posay-logo-png_seeklogo-624660.png'},
-  {n:'Avène',c:'dermo',pl:'Dermokosmetyki',en:'Dermo',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Avene_logo.svg/200px-Avene_logo.svg.png'},
-  {n:'SVR',c:'dermo',pl:'Dermokosmetyki',en:'Dermo',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/SVR_logo.svg/200px-SVR_logo.svg.png'},
-  {n:'Uriage',c:'dermo',pl:'Dermokosmetyki',en:'Dermo',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Uriage_logo.svg/200px-Uriage_logo.svg.png'},
-  {n:'Biotherm',c:'dermo',pl:'Dermokosmetyki',en:'Dermo',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Biotherm_logo.svg/200px-Biotherm_logo.svg.png'},
-  {n:"L'Oréal",c:'care',pl:'Personal Care',en:'Personal Care',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/L%27Or%C3%A9al_logo.svg/200px-L%27Or%C3%A9al_logo.svg.png'},
-  {n:'Byphasse',c:'care',pl:'Personal Care',en:'Personal Care',logo:''},
-  {n:'Gillette',c:'care',pl:'Personal Care',en:'Personal Care',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Gillette_logo.svg/200px-Gillette_logo.svg.png'},
-  {n:'Evian',c:'care',pl:'Personal Care',en:'Personal Care',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Evian_logo.svg/200px-Evian_logo.svg.png'},
-  {n:'Braun',c:'care',pl:'Personal Care',en:'Personal Care',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Braun_logo.svg/200px-Braun_logo.svg.png'},
-  {n:'Marvis',c:'oral',pl:'Higiena',en:'Hygiene',logo:''},
-  {n:'Oral-B',c:'oral',pl:'Higiena',en:'Hygiene',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Oral-B_logo.svg/200px-Oral-B_logo.svg.png'},
-  {n:'Philips',c:'oral',pl:'Higiena',en:'Hygiene',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Philips_logo_new.svg/200px-Philips_logo_new.svg.png'},
-  {n:'Finish',c:'house',pl:'Household',en:'Household',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Finish_logo.svg/200px-Finish_logo.svg.png'},
-  {n:'Fairy',c:'house',pl:'Household',en:'Household',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Fairy_logo.svg/200px-Fairy_logo.svg.png'},
-  {n:'Ariel',c:'house',pl:'Household',en:'Household',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Ariel_logo.svg/200px-Ariel_logo.svg.png'},
-  {n:'Tommee Tippee',c:'baby',pl:'Mama & Baby',en:'Mama & Baby',logo:''},
-  {n:'MAM',c:'baby',pl:'Mama & Baby',en:'Mama & Baby',logo:''},
-  {n:'Olaplex',c:'care',pl:'Personal Care',en:'Personal Care',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Olaplex_logo.svg/200px-Olaplex_logo.svg.png'},
-  {n:'Neutrogena',c:'dermo',pl:'Dermokosmetyki',en:'Dermo',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Neutrogena_logo.svg/200px-Neutrogena_logo.svg.png'},
-  {n:'Eucerin',c:'dermo',pl:'Dermokosmetyki',en:'Dermo',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Eucerin_logo.svg/200px-Eucerin_logo.svg.png'},
-  {n:'Nivea',c:'care',pl:'Personal Care',en:'Personal Care',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/NIVEA_logo.svg/200px-NIVEA_logo.svg.png'},
-  {n:'Lactacyd',c:'care',pl:'Personal Care',en:'Personal Care',logo:''},
-  {n:'Scholl',c:'care',pl:'Personal Care',en:'Personal Care',logo:''},
-  {n:'Clinique',c:'dermo',pl:'Dermokosmetyki',en:'Dermo',logo:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Clinique_logo.svg/200px-Clinique_logo.svg.png'},
-  {n:'Nuxe',c:'dermo',pl:'Dermokosmetyki',en:'Dermo',logo:''},
-  {n:'Solgar',c:'care',pl:'Personal Care',en:'Personal Care',logo:''},
+  {n:'Bioderma',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:'CeraVe',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:'Vichy',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:'La Roche-Posay',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:'Avène',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:'SVR',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:'Uriage',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:'Biotherm',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:"L'Oréal",c:'care',pl:'Personal Care',en:'Personal Care'},
+  {n:'Byphasse',c:'care',pl:'Personal Care',en:'Personal Care'},
+  {n:'Gillette',c:'care',pl:'Personal Care',en:'Personal Care'},
+  {n:'Evian',c:'care',pl:'Personal Care',en:'Personal Care'},
+  {n:'Braun',c:'care',pl:'Personal Care',en:'Personal Care'},
+  {n:'Marvis',c:'oral',pl:'Higiena',en:'Hygiene'},
+  {n:'Oral-B',c:'oral',pl:'Higiena',en:'Hygiene'},
+  {n:'Philips',c:'oral',pl:'Higiena',en:'Hygiene'},
+  {n:'Finish',c:'house',pl:'Household',en:'Household'},
+  {n:'Fairy',c:'house',pl:'Household',en:'Household'},
+  {n:'Ariel',c:'house',pl:'Household',en:'Household'},
+  {n:'Tommee Tippee',c:'baby',pl:'Mama & Baby',en:'Mama & Baby'},
+  {n:'MAM',c:'baby',pl:'Mama & Baby',en:'Mama & Baby'},
+  {n:'Olaplex',c:'care',pl:'Personal Care',en:'Personal Care'},
+  {n:'Neutrogena',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:'Eucerin',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:'Nivea',c:'care',pl:'Personal Care',en:'Personal Care'},
+  {n:'Lactacyd',c:'care',pl:'Personal Care',en:'Personal Care'},
+  {n:'Scholl',c:'care',pl:'Personal Care',en:'Personal Care'},
+  {n:'Clinique',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:'Nuxe',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:'Solgar',c:'care',pl:'Personal Care',en:'Personal Care'},
 ];
 
 const COL={dermo:'#3D6B41',care:'#6B9E6F',oral:'#3a7a7a',house:'#5a6b5c',baby:'#7a6050'};
@@ -713,15 +757,17 @@ function rB(f){
   const g=document.getElementById('bgrid');g.innerHTML='';
   const list=f==='all'?brands:brands.filter(b=>b.c===f);
   list.forEach((b,i)=>{
-    const col=COL[b.c]||'#6B9E6F';
     const d=document.createElement('div');
     d.className='bcard rv';d.style.transitionDelay=(i*.035)+'s';
-    const logoHtml=b.logo
-      ?`<img src="${b.logo}" alt="${b.n}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-      :'';
-    const fbHtml=`<div class="blogo-fb" style="${b.logo?'display:none':''}">${ini(b.n)}</div>`;
+    const realUrl = LOGOS[b.n];
+    const fbUrl = makeFallback(b.n);
+    const imgSrc = realUrl || fbUrl;
+    // If real URL — try it, fall back to SVG on error
+    const imgTag = realUrl
+      ? `<img src="${realUrl}" alt="${b.n}" onerror="this.src='${fbUrl}'">`
+      : `<img src="${fbUrl}" alt="${b.n}">`;
     d.innerHTML=`
-      <div class="blogo" style="color:${col}">${logoHtml}${fbHtml}</div>
+      <div class="blogo">${imgTag}</div>
       <div class="bnm">${b.n}</div>
       <div class="bct">${lang==='pl'?b.pl:b.en}</div>`;
     g.appendChild(d);
