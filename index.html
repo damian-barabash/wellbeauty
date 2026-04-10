@@ -603,14 +603,14 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
       </div>
       <div class="cform rv d3">
         <div class="crow">
-          <div class="cg"><label data-pl="Imię i nazwisko" data-en="Full name">Imię i nazwisko</label><input type="text" placeholder="Jan Kowalski"></div>
-          <div class="cg"><label data-pl="Firma" data-en="Company">Firma</label><input type="text" placeholder="Nazwa firmy"></div>
+          <div class="cg"><label data-pl="Imię i nazwisko" data-en="Full name">Imię i nazwisko</label><input id="f-name" type="text" placeholder="Jan Kowalski"></div>
+          <div class="cg"><label data-pl="Firma" data-en="Company">Firma</label><input id="f-company" type="text" placeholder="Nazwa firmy"></div>
         </div>
-        <div class="cg"><label>Email</label><input type="email" placeholder="email@firma.pl"></div>
-        <div class="cg"><label data-pl="Telefon (opcjonalnie)" data-en="Phone (optional)">Telefon (opcjonalnie)</label><input type="tel" placeholder="+48 000 000 000"></div>
+        <div class="cg"><label>Email</label><input id="f-email" type="email" placeholder="email@firma.pl"></div>
+        <div class="cg"><label data-pl="Telefon (opcjonalnie)" data-en="Phone (optional)">Telefon (opcjonalnie)</label><input id="f-phone" type="tel" placeholder="+48 000 000 000"></div>
         <div class="cg">
           <label data-pl="Typ działalności" data-en="Business type">Typ działalności</label>
-          <select>
+          <select id="f-type">
             <option data-pl="Wybierz..." data-en="Select...">Wybierz...</option>
             <option data-pl="Apteka / Drogeria" data-en="Pharmacy / Drugstore">Apteka / Drogeria</option>
             <option data-pl="Salon kosmetyczny" data-en="Beauty salon">Salon kosmetyczny</option>
@@ -619,9 +619,9 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
             <option data-pl="Inne" data-en="Other">Inne</option>
           </select>
         </div>
-        <div class="cg"><label data-pl="Wiadomość" data-en="Message">Wiadomość</label><textarea placeholder="Opisz czego potrzebujesz, jakich marek szukasz..."></textarea></div>
+        <div class="cg"><label data-pl="Wiadomość" data-en="Message">Wiadomość</label><textarea id="f-msg" placeholder="Opisz czego potrzebujesz, jakich marek szukasz..."></textarea></div>
         <button class="btn-p" id="sbtn" onclick="hSub(this)" data-pl="Wyślij zapytanie" data-en="Send enquiry">Wyślij zapytanie</button>
-        <p class="cfn" data-pl="Odpowiadamy w ciągu 1 dnia roboczego. Obsługujemy wyłącznie zapytania B2B." data-en="We respond within 1 business day. B2B enquiries only.">Odpowiadamy w ciągu 1 dnia roboczego. Obsługujemy wyłącznie zapytania B2B.</p>
+        <p class="cfn" id="form-status" data-pl="Odpowiadamy w ciągu 1 dnia roboczego. Obsługujemy wyłącznie zapytania B2B." data-en="We respond within 1 business day. B2B enquiries only.">Odpowiadamy w ciągu 1 dnia roboczego. Obsługujemy wyłącznie zapytania B2B.</p>
       </div>
     </div>
   </div>
@@ -818,7 +818,56 @@ function oM(){document.getElementById('mob').classList.add('open');document.body
 function cM(){document.getElementById('mob').classList.remove('open');document.body.style.overflow=''}
 
 /* ── FORM ── */
-function hSub(b){b.textContent='✓ '+(lang==='pl'?'Wysłano!':'Sent!');b.style.background='var(--g)';b.disabled=true}
+async function hSub(btn) {
+  const name    = document.getElementById('f-name').value.trim();
+  const company = document.getElementById('f-company').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const phone   = document.getElementById('f-phone').value.trim();
+  const type    = document.getElementById('f-type').value.trim();
+  const msg     = document.getElementById('f-msg').value.trim();
+  const status  = document.getElementById('form-status');
+
+  if (!name || !email || !msg) {
+    status.textContent = lang === 'pl'
+      ? '⚠ Wypełnij: imię, email i wiadomość.'
+      : '⚠ Please fill in: name, email and message.';
+    status.style.color = '#c0392b';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = lang === 'pl' ? 'Wysyłanie...' : 'Sending...';
+  status.textContent = '';
+  status.style.color = '';
+
+  try {
+    const res = await fetch('https://wellbeauty.dmytrii-spectrum.workers.dev/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, company, email, phone, type, msg, lang })
+    });
+
+    if (res.ok) {
+      btn.textContent = '✓ ' + (lang === 'pl' ? 'Wysłano!' : 'Sent!');
+      btn.style.background = 'var(--g)';
+      status.textContent = lang === 'pl'
+        ? 'Dziękujemy! Odpiszemy w ciągu 1 dnia roboczego.'
+        : 'Thank you! We will reply within 1 business day.';
+      status.style.color = 'var(--gd)';
+      ['f-name','f-company','f-email','f-phone','f-msg'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('f-type').selectedIndex = 0;
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = lang === 'pl' ? 'Wyślij zapytanie' : 'Send enquiry';
+    status.textContent = lang === 'pl'
+      ? '⚠ Błąd wysyłki. Spróbuj ponownie lub napisz na kontakt@wellbeauty.pl'
+      : '⚠ Send error. Try again or email kontakt@wellbeauty.pl';
+    status.style.color = '#c0392b';
+  }
+}
 
 /* ── PRELOADER ── */
 window.addEventListener('load',()=>setTimeout(()=>document.getElementById('pl').classList.add('gone'),1200));
