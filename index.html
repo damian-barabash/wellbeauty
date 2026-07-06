@@ -151,6 +151,28 @@ section{padding:108px 56px}
 .bnm{font-size:14px;font-weight:600;color:var(--dk);position:relative;z-index:1}
 .bct{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--g);position:relative;z-index:1;font-weight:500}
 
+/* ── K-BEAUTY SECTION ── */
+.htag.hk{color:#B25668}
+#kbeauty{background:linear-gradient(165deg,#FDF2F3 0%,#FAF1EE 45%,#F6F4EF 100%);position:relative;overflow:hidden;padding-top:114px}
+.kband{position:absolute;top:0;left:0;right:0;height:6px;background:repeating-linear-gradient(90deg,#C9556B 0 56px,#E8B04B 56px 112px,#4E8F5F 112px 168px,#4A6FA8 168px 224px,#7C5CA6 224px 280px)}
+.korb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.ko1{width:440px;height:440px;top:-90px;left:-70px;background:radial-gradient(circle,rgba(217,133,152,.16),transparent 70%)}
+.ko2{width:380px;height:380px;bottom:-70px;right:90px;background:radial-gradient(circle,rgba(226,168,120,.13),transparent 70%)}
+.khang{position:absolute;top:100px;right:38px;writing-mode:vertical-rl;font-size:92px;font-weight:700;letter-spacing:18px;color:rgba(178,86,104,.07);line-height:1;pointer-events:none;user-select:none}
+.saek{display:flex;width:92px;height:5px;border-radius:100px;overflow:hidden;margin-bottom:16px}
+.saek span{flex:1}
+.saek span:nth-child(1){background:#C9556B}.saek span:nth-child(2){background:#E8B04B}.saek span:nth-child(3){background:#4E8F5F}.saek span:nth-child(4){background:#4A6FA8}.saek span:nth-child(5){background:#7C5CA6}
+.kslbl{color:#B25668}
+#kbeauty .stit em{color:#B25668}
+.kstamp{display:inline-block;vertical-align:middle;margin-left:20px;background:#C23B3B;color:#fff;border-radius:10px;padding:8px 10px;font-family:var(--fb);font-size:14px;font-weight:700;line-height:1.3;letter-spacing:2px;text-align:center;transform:rotate(-5deg);box-shadow:0 8px 22px rgba(194,59,59,.28)}
+.khead{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:48px;position:relative;z-index:1}
+#kgrid{position:relative;z-index:1}
+.bcard.kb{background:#FFFDFD;border-color:rgba(178,86,104,.16);border-radius:22px}
+.bcard.kb::before{background:linear-gradient(150deg,#FBEFF1,transparent)}
+.bcard.kb:hover{border-color:#E3B9C1;box-shadow:0 20px 60px rgba(178,86,104,.16)}
+.kct{font-size:11px;letter-spacing:1.5px;color:#B25668;position:relative;z-index:1;font-weight:500}
+.kct small{font-size:9px;letter-spacing:2px;color:#C99AA5;text-transform:uppercase;display:block;margin-top:3px}
+
 /* ── OFFER ── */
 #offer{background:var(--gd);color:#fff}
 #offer .slbl{color:var(--gp)}
@@ -256,7 +278,8 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
   .ftop{grid-template-columns:1fr 1fr}
   nav,nav.sc{padding:18px 28px}
   section{padding:80px 28px}
-  .bhead{grid-template-columns:1fr}
+  .bhead,.khead{grid-template-columns:1fr}
+  .khang{font-size:60px;right:14px;letter-spacing:12px}
   .show-wrap{padding:0 28px}
 }
 @media(max-width:768px){
@@ -266,6 +289,8 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
   .wvst{grid-template-columns:1fr}
   .pgrid{grid-template-columns:1fr}
   .crow{grid-template-columns:1fr}
+  .khang{display:none}
+  .kstamp{margin-left:12px;font-size:12px;padding:6px 8px}
   .ftop{grid-template-columns:1fr}
   footer{padding:48px 24px 28px}
   .show-cards{grid-template-columns:repeat(2,1fr)}
@@ -288,6 +313,7 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
   <button class="mob-x" onclick="cM()">&#10005;</button>
   <a href="#about" onclick="cM()" data-pl="O nas" data-en="About">O nas</a>
   <a href="#brands" onclick="cM()" data-pl="Marki" data-en="Brands">Marki</a>
+  <a href="#kbeauty" onclick="cM()">K-Beauty</a>
   <a href="#offer" onclick="cM()" data-pl="Oferta" data-en="Offer">Oferta</a>
   <a href="#contact" onclick="cM()" data-pl="Kontakt" data-en="Contact">Kontakt</a>
   <div class="ltg" style="margin-top:8px">
@@ -306,6 +332,7 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
     <ul class="nls">
       <li><a href="#about" data-pl="O nas" data-en="About">O nas</a></li>
       <li><a href="#brands" data-pl="Marki" data-en="Brands">Marki</a></li>
+      <li><a href="#kbeauty">K-Beauty</a></li>
       <li><a href="#offer" data-pl="Oferta" data-en="Offer">Oferta</a></li>
       <li><a href="#contact" data-pl="Kontakt" data-en="Contact">Kontakt</a></li>
     </ul>
@@ -323,15 +350,15 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
   <div class="hbg"><div class="horb ho1"></div><div class="horb ho2"></div></div>
   <div class="hc">
     <h1 class="htitle" data-pl="Twój partner<br>w <em>świecie</em><br>piękna" data-en="Your partner<br>in the <em>world</em><br>of beauty">Twój partner<br>w <em>świecie</em><br>piękna</h1>
-    <p class="hsub" data-pl="WellBeauty to hurtowa dystrybucja kosmetyków, dermokosmetyków i produktów personal care. Dostarczamy 20+ uznanych marek bezpośrednio do klientów B2B." data-en="WellBeauty is a wholesale distributor of cosmetics, dermo-cosmetics and personal care products. We supply 20+ renowned brands directly to B2B clients.">
-      WellBeauty to hurtowa dystrybucja kosmetyków, dermokosmetyków i produktów personal care. Dostarczamy 20+ uznanych marek bezpośrednio do klientów B2B.
+    <p class="hsub" data-pl="WellBeauty to hurtowa dystrybucja kosmetyków, dermokosmetyków, k-beauty i produktów personal care. Dostarczamy 45+ uznanych marek bezpośrednio do klientów B2B." data-en="WellBeauty is a wholesale distributor of cosmetics, dermo-cosmetics, k-beauty and personal care products. We supply 45+ renowned brands directly to B2B clients.">
+      WellBeauty to hurtowa dystrybucja kosmetyków, dermokosmetyków, k-beauty i produktów personal care. Dostarczamy 45+ uznanych marek bezpośrednio do klientów B2B.
     </p>
     <div class="hacts">
       <a href="#brands" class="btn-p" data-pl="Zobacz nasze marki" data-en="Explore our brands">Zobacz nasze marki</a>
       <a href="#contact" class="btn-g" data-pl="Nawiąż współpracę" data-en="Start partnership">Nawiąż współpracę</a>
     </div>
     <div class="hstats">
-      <div><div class="hsn">20+</div><div class="hsl" data-pl="Marek w portfolio" data-en="Brands">Marek w portfolio</div></div>
+      <div><div class="hsn">45+</div><div class="hsl" data-pl="Marek w portfolio" data-en="Brands">Marek w portfolio</div></div>
       <div><div class="hsn">B2B</div><div class="hsl" data-pl="Tylko hurtowo" data-en="Wholesale only">Tylko hurtowo</div></div>
       <div><div class="hsn">PL·EN</div><div class="hsl" data-pl="Obsługa klienta" data-en="Client service">Obsługa klienta</div></div>
     </div>
@@ -345,6 +372,7 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
         <div class="htag">Personal Care</div>
         <div class="htag">Household</div>
         <div class="htag">Mama &amp; Baby</div>
+        <div class="htag hk">K-Beauty 케이뷰티</div>
       </div>
       <div class="hv-badge">
         <div class="bdot"></div>
@@ -401,7 +429,7 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
         <div class="avis-img">
           <img src="https://images.unsplash.com/photo-1617897903246-719242758050?w=700&q=80&auto=format&fit=crop" alt="WellBeauty kosmetyki">
         </div>
-        <div class="avis-stat"><div class="avs-n">20+</div><div class="avs-l" data-pl="Marek" data-en="Brands">Marek</div></div>
+        <div class="avis-stat"><div class="avs-n">45+</div><div class="avs-l" data-pl="Marek" data-en="Brands">Marek</div></div>
         <div class="avis-float">
           <div class="avf-ic"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
           <div>
@@ -435,6 +463,26 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
       <button class="fbt" data-f="baby" data-pl="Mama &amp; Baby" data-en="Mama &amp; Baby">Mama &amp; Baby</button>
     </div>
     <div class="bgrid rv" id="bgrid"></div>
+  </div>
+</section>
+
+<!-- K-BEAUTY -->
+<section id="kbeauty">
+  <div class="kband"></div>
+  <div class="korb ko1"></div><div class="korb ko2"></div>
+  <div class="khang" aria-hidden="true">아름다움</div>
+  <div class="ct">
+    <div class="khead">
+      <div>
+        <div class="saek rv"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="slbl kslbl rv" data-pl="K-Beauty · prosto z Seulu" data-en="K-Beauty · straight from Seoul">K-Beauty · prosto z Seulu</div>
+        <h2 class="stit rv d1" data-pl="Koreańska <em>pielęgnacja</em><br>nowej generacji <span class='kstamp'>케이<br>뷰티</span>" data-en="Korean <em>skincare</em><br>of the new generation <span class='kstamp'>케이<br>뷰티</span>">Koreańska <em>pielęgnacja</em><br>nowej generacji <span class="kstamp">케이<br>뷰티</span></h2>
+      </div>
+      <p class="bdesc rv d2" data-pl="Fenomen prosto z Seulu — esencje, ampułki, kremy SPF i efekt glass skin. 15 kultowych koreańskich marek dostępnych hurtowo w jednym zamówieniu." data-en="The phenomenon straight from Seoul — essences, ampoules, SPF creams and the glass-skin effect. 15 cult Korean brands available wholesale in one order.">
+        Fenomen prosto z Seulu — esencje, ampułki, kremy SPF i efekt glass skin. 15 kultowych koreańskich marek dostępnych hurtowo w jednym zamówieniu.
+      </p>
+    </div>
+    <div class="bgrid rv" id="kgrid"></div>
   </div>
 </section>
 
@@ -562,7 +610,7 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
       <div class="wvis rv d2">
         <div class="wvti" data-pl="Razem budujemy silniejszy biznes" data-en="Together we build a stronger business">Razem budujemy silniejszy biznes</div>
         <div class="wvst">
-          <div class="wvs"><div class="wvsn">20+</div><div class="wvsl" data-pl="Marek" data-en="Brands">Marek</div></div>
+          <div class="wvs"><div class="wvsn">45+</div><div class="wvsl" data-pl="Marek" data-en="Brands">Marek</div></div>
           <div class="wvs"><div class="wvsn">B2B</div><div class="wvsl" data-pl="Hurtowo" data-en="Wholesale">Hurtowo</div></div>
           <div class="wvs"><div class="wvsn">1 dzień</div><div class="wvsl" data-pl="Odpowiedź" data-en="Response">Odpowiedź</div></div>
           <div class="wvs"><div class="wvsn">PL+EN</div><div class="wvsl" data-pl="Języki" data-en="Languages">Języki</div></div>
@@ -649,6 +697,7 @@ footer{background:var(--dk);color:#fff;padding:60px 56px 32px}
       <h4 data-pl="Kategorie" data-en="Categories">Kategorie</h4>
       <a href="#brands" data-pl="Dermokosmetyki" data-en="Dermo-cosmetics">Dermokosmetyki</a>
       <a href="#brands" data-pl="Personal Care" data-en="Personal Care">Personal Care</a>
+      <a href="#kbeauty" data-pl="K-Beauty" data-en="K-Beauty">K-Beauty</a>
       <a href="#brands" data-pl="Higiena" data-en="Hygiene">Higiena</a>
       <a href="#brands" data-pl="Household" data-en="Household">Household</a>
       <a href="#brands" data-pl="Mama &amp; Baby" data-en="Mama &amp; Baby">Mama &amp; Baby</a>
@@ -705,14 +754,40 @@ const FALLBACK_SVG = {
   'Lactacyd':      {text:'Lactacyd', color:'#005baa', size:24, weight:700, font:'Arial,sans-serif'},
   'Scholl':        {text:'Scholl', color:'#d10031', size:30, weight:900, font:'Arial,sans-serif'},
   'Solgar':        {text:'SOLGAR', color:'#1a5c2a', size:26, weight:700, font:'Georgia,serif'},
+  'Mustela':       {text:'mustela', color:'#0A4C95', size:34, weight:700, font:'Verdana,Arial'},
+  'Embryolisse':   {text:'EMBRYOLISSE', color:'#1D2E5E', size:20, weight:600, font:'Arial,sans-serif', ls:2},
+  'Abib':          {text:'Abib', color:'#111', size:34, weight:500, font:'Georgia,serif', ls:2},
+  'Beauty of Joseon':{text:'Beauty of Joseon', color:'#2b2b2b', size:19, weight:500, font:'Georgia,serif'},
+  'Dr. Althea':    {text:'DR.ALTHEA', color:'#111', size:22, weight:700, font:'Arial,sans-serif', ls:2},
+  'Dr. Melaxin':   {text:'Dr.Melaxin', color:'#101820', size:24, weight:700, font:'Arial,sans-serif'},
+  'Ma:nyo':        {text:'ma:nyo', color:'#1a1a1a', size:34, weight:700, font:'Arial,sans-serif'},
+  'SKIN1004':      {text:'SKIN1004', color:'#111', size:26, weight:700, font:'Arial,sans-serif', ls:1},
+  'SKINFOOD':      {text:'SKINFOOD', color:'#000', size:24, weight:700, font:'Arial,sans-serif', ls:1},
+  'Celimax':       {text:'celimax', color:'#111', size:30, weight:700, font:'Arial,sans-serif'},
+  'Skin627':       {text:'SKIN627', color:'#333', size:26, weight:600, font:'Arial,sans-serif', ls:1},
+  'Anua':          {text:'ANUA', color:'#2b2b2b', size:32, weight:500, font:'Georgia,serif', ls:5},
+  'Tocobo':        {text:'TOCOBO', color:'#14452F', size:26, weight:700, font:'Arial,sans-serif', ls:2},
+  'Arencia':       {text:'ARENCIA', color:'#1E3932', size:24, weight:600, font:'Georgia,serif', ls:2},
+  'COSRX':         {text:'COSRX', color:'#000', size:30, weight:800, font:'Arial,sans-serif', ls:1},
+  'Laneige':       {text:'LANEIGE', color:'#173F8F', size:24, weight:600, font:'Arial,sans-serif', ls:3},
+  'Medicube':      {text:'medicube', color:'#0F0F0F', size:28, weight:800, font:'Arial,sans-serif'},
 };
 
 function makeFallback(brand) {
   const f = FALLBACK_SVG[brand] || {text: brand, color:'#3D6B41', size:24, weight:600, font:'Arial'};
-  const vw = Math.max(120, f.text.length * f.size * 0.62);
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${vw} 60"><text y="42" font-family="${f.font},sans-serif" font-size="${f.size}" font-weight="${f.weight}" fill="${f.color}">${f.text}</text></svg>`;
+  const ls = f.ls || 0;
+  const caps = !/[a-z]/.test(f.text); // uppercase glyphs are wider
+  const vw = Math.max(120, f.text.length * (f.size * (caps ? 0.74 : 0.62) + ls) + 6);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${vw} 60"><text x="${vw/2}" y="42" text-anchor="middle" font-family="${f.font},sans-serif" font-size="${f.size}" font-weight="${f.weight}" letter-spacing="${ls}" fill="${f.color}">${f.text}</text></svg>`;
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
+
+/* Korean names for the K-beauty block */
+const KHANGUL = {
+  'Abib':'아비브','Beauty of Joseon':'조선미녀','Dr. Althea':'닥터알테아','Dr. Melaxin':'닥터멜락신',
+  'Ma:nyo':'마녀공장','SKIN1004':'스킨1004','SKINFOOD':'스킨푸드','Celimax':'셀리맥스','Skin627':'스킨627',
+  'Anua':'아누아','Tocobo':'토코보','Arencia':'아렌시아','COSRX':'코스알엑스','Laneige':'라네즈','Medicube':'메디큐브',
+};
 
 const brands=[
   {n:'Bioderma',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
@@ -736,6 +811,7 @@ const brands=[
   {n:'Ariel',c:'house',pl:'Household',en:'Household'},
   {n:'Tommee Tippee',c:'baby',pl:'Mama & Baby',en:'Mama & Baby'},
   {n:'MAM',c:'baby',pl:'Mama & Baby',en:'Mama & Baby'},
+  {n:'Mustela',c:'baby',pl:'Mama & Baby',en:'Mama & Baby'},
   {n:'Olaplex',c:'care',pl:'Personal Care',en:'Personal Care'},
   {n:'Neutrogena',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
   {n:'Eucerin',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
@@ -744,32 +820,65 @@ const brands=[
   {n:'Scholl',c:'care',pl:'Personal Care',en:'Personal Care'},
   {n:'Clinique',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
   {n:'Nuxe',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
+  {n:'Embryolisse',c:'dermo',pl:'Dermokosmetyki',en:'Dermo'},
   {n:'Solgar',c:'care',pl:'Personal Care',en:'Personal Care'},
+  {n:'Abib',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'Beauty of Joseon',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'Dr. Althea',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'Dr. Melaxin',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'Ma:nyo',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'SKIN1004',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'SKINFOOD',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'Celimax',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'Skin627',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'Anua',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'Tocobo',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'Arencia',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'COSRX',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'Laneige',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
+  {n:'Medicube',c:'kbeauty',pl:'K-Beauty',en:'K-Beauty'},
 ];
 
-const COL={dermo:'#3D6B41',care:'#6B9E6F',oral:'#3a7a7a',house:'#5a6b5c',baby:'#7a6050'};
+const COL={dermo:'#3D6B41',care:'#6B9E6F',oral:'#3a7a7a',house:'#5a6b5c',baby:'#7a6050',kbeauty:'#B25668'};
 let lang='pl', af='all';
 
 function ini(n){return n.replace(/[^A-Za-z\u00C0-\u017E]/g,' ').trim().split(' ').filter(Boolean).map(w=>w[0]).join('').slice(0,2).toUpperCase()}
 
+function logoTag(n){
+  const realUrl = LOGOS[n];
+  const fbUrl = makeFallback(n);
+  // If real URL — try it, fall back to SVG on error
+  return realUrl
+    ? `<img src="${realUrl}" alt="${n}" onerror="this.src='${fbUrl}'">`
+    : `<img src="${fbUrl}" alt="${n}">`;
+}
+
 function rB(f){
   af=f;
   const g=document.getElementById('bgrid');g.innerHTML='';
-  const list=f==='all'?brands:brands.filter(b=>b.c===f);
+  const list=f==='all'?brands.filter(b=>b.c!=='kbeauty'):brands.filter(b=>b.c===f);
   list.forEach((b,i)=>{
     const d=document.createElement('div');
     d.className='bcard rv';d.style.transitionDelay=(i*.035)+'s';
-    const realUrl = LOGOS[b.n];
-    const fbUrl = makeFallback(b.n);
-    const imgSrc = realUrl || fbUrl;
-    // If real URL — try it, fall back to SVG on error
-    const imgTag = realUrl
-      ? `<img src="${realUrl}" alt="${b.n}" onerror="this.src='${fbUrl}'">`
-      : `<img src="${fbUrl}" alt="${b.n}">`;
     d.innerHTML=`
-      <div class="blogo">${imgTag}</div>
+      <div class="blogo">${logoTag(b.n)}</div>
       <div class="bnm">${b.n}</div>
       <div class="bct">${lang==='pl'?b.pl:b.en}</div>`;
+    g.appendChild(d);
+  });
+  oR();
+}
+
+/* ── K-BEAUTY GRID ── */
+function rK(){
+  const g=document.getElementById('kgrid');g.innerHTML='';
+  brands.filter(b=>b.c==='kbeauty').forEach((b,i)=>{
+    const d=document.createElement('div');
+    d.className='bcard kb rv';d.style.transitionDelay=(i*.035)+'s';
+    d.innerHTML=`
+      <div class="blogo">${logoTag(b.n)}</div>
+      <div class="bnm">${b.n}</div>
+      <div class="kct">${KHANGUL[b.n]||''}<small>K-Beauty</small></div>`;
     g.appendChild(d);
   });
   oR();
@@ -873,7 +982,7 @@ async function hSub(btn) {
 window.addEventListener('load',()=>setTimeout(()=>document.getElementById('pl').classList.add('gone'),1200));
 
 /* ── INIT ── */
-bMq();rB('all');oR();
+bMq();rB('all');rK();oR();
 </script>
 </body>
 </html>
